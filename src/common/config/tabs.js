@@ -1,0 +1,6 @@
+export const START = 'start'
+export const STEP = 'step'
+export const THEORY = 'theory'
+export const ENDED = 'ended'
+export const LIVE = 'live'
+export const CONCERN = 'concern'
