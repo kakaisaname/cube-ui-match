@@ -17,13 +17,8 @@ export default {
     methods: {
         share(){
             //获取页面URL
-            let url = window.location.href
             let requestUrl = "http://www.hhfff.cn/api/getWxConfig"
-            axios.get(requestUrl,{
-                params: {
-                    url: url
-                }
-            })
+            axios.get(requestUrl)
             .then((response) => {
                 //判断是否获取成功
                 let res = response.data
