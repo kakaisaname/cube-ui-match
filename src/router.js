@@ -47,5 +47,10 @@ export default new Router({
       name:'empty',
       component: () =>
       import(/* webpackChunkName: "about" */ "./views/Dati/Home/empty.vue")
+    },{
+      path: '/dati/share',
+      name:'share',
+      component: () =>
+      import(/* webpackChunkName: "about" */ "./views/Dati/Home/share.vue")
     }]
 })

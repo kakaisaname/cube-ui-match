@@ -30,12 +30,10 @@ export default {
     },
     share () {
       this.$refs.popup.hide()
-      this.gongzonghaoDialog.show()
-    //   this.$createToast({
-    //     type: 'correct',
-    //     txt: '开启成功',
-    //     time: 1000
-    //   }).show()
+      //这只是一张分享图片  **后期可能去掉
+      // this.gongzonghaoDialog.show()
+      
+
     },
     relive() {
       this.$refs.popup.hide()
