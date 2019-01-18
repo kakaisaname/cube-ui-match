@@ -61,8 +61,9 @@ export default {
                                 //直接跳转到首页
                             },
                             cancel: function () {  //下周开发，取消分享其实可以继续分享的 ***
+                            alert(4)
                                 sessionStorage.removeItem('shan_share_fresh')
-                                Message.success('分享到朋友圈失败');
+                                Message.error('分享到朋友圈失败');
                                 setTimeout(() => {
                                     window.location.href = "http://questions.hhfff.cn/"
                                 }, 3000)
