@@ -54,8 +54,8 @@ export default {
                             // 设置成功
                                 console.log("分享到朋友圈成功返回的信息为:", res);
                                 Message.success('分享到朋友圈成功');
+                                window.location.href = "http://questions.hhfff.cn/"
                                 //直接跳转到首页
-                                router.push('/');
                             }
                         });
                     })
