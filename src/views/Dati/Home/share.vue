@@ -17,6 +17,8 @@ export default {
     methods: {
         share(){
             let shan_share_fresh = sessionStorage.getItem('shan_share_fresh')
+            alert(shan_share_fresh)
+            alert(1)
             if (shan_share_fresh == 'undefined') {
                 sessionStorage.setItem('shan_share_fresh',1)
                 location.reload()
