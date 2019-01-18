@@ -24,6 +24,7 @@ export default {
                 let res = response.data
                 if (res.code == '000') { //获取微信配置成功
                     let result = res.data
+                    location.reload()
                     //----------微信配置信息----------------------
                     wx.config({
                         debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
