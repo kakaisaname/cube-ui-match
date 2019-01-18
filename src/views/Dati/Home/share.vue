@@ -10,12 +10,15 @@ import { Message } from 'element-ui'
 import wx from 'weixin-js-sdk'       //引入wx sdk
 export default {
     name:'share',
+    data () {
+        location.reload()
+        return {
+                  
+        }
+    },
     created () {
         //获取微信配置
         this.share()
-    },
-    mounted () {
-      location.reload()  
     },
     methods: {
         share(){
@@ -66,7 +69,7 @@ export default {
                 Message.success('分享功能，系统正在维护中。。。')
                 return false
             })
-        }
+        } 
     }
 }
 </script>
