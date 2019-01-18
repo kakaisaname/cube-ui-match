@@ -51,10 +51,13 @@ export default {
                             link: 'http://questions.hhfff.cn/shareurl', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                             imgUrl: 'http://118.24.61.194:8089/share.jpg', // 分享图标
                             success: function () {
+                                sessionStorage.removeItem('shan_share_fresh')
                             // 设置成功
                                 console.log("分享到朋友圈成功返回的信息为:", res);
                                 Message.success('分享到朋友圈成功');
-                                window.location.href = "http://questions.hhfff.cn/"
+                                setTimeout(() => {
+                                    window.location.href = "http://questions.hhfff.cn/"
+                                }, 3000)
                                 //直接跳转到首页
                             }
                         });
