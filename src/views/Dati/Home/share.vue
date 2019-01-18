@@ -17,10 +17,13 @@ export default {
     methods: {
         share(){
             let shan_share_fresh = sessionStorage.getItem('shan_share_fresh')
-            if (shan_share_fresh == 'null') {
+            alert(shan_share_fresh)
+            if (!shan_share_fresh) {
+                alert(1)
                 sessionStorage.setItem('shan_share_fresh',1)
                 location.reload()
             }
+            alert(2)
             //获取页面URL
             let requestUrl = "http://www.hhfff.cn/api/getWxConfig"
             axios.get(requestUrl)
