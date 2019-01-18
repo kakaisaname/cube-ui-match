@@ -16,6 +16,7 @@ export default {
     },
     methods: {
         share(){
+            //也不知道为什么，分享 必须要刷新下页面才行，所以做以下判断
             let shan_share_fresh = sessionStorage.getItem('shan_share_fresh')
             if (!shan_share_fresh) {
                 sessionStorage.setItem('shan_share_fresh',1)
@@ -53,6 +54,8 @@ export default {
                             // 设置成功
                                 console.log("分享到朋友圈成功返回的信息为:", res);
                                 Message.success('分享到朋友圈成功');
+                                //直接跳转到首页
+                                this.$router.push('/');
                             }
                         });
                     })
