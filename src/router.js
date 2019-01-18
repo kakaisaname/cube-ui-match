@@ -52,5 +52,10 @@ export default new Router({
       name:'share',
       component: () =>
       import(/* webpackChunkName: "about" */ "./views/Dati/Home/share.vue")
+    },,{
+      path: '/shareurl', //分享链接的
+      name:'shareurl',
+      component: () =>
+      import(/* webpackChunkName: "about" */ "./views/Dati/Home/shareurl.vue")
     }]
 })
