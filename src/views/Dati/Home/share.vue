@@ -26,7 +26,7 @@ export default {
                     let result = res.data
                     //----------微信配置信息----------------------
                     wx.config({
-                        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
                         appId: result.appId, // 必填，公众号的唯一标识
                         timestamp: result.timestamp, // 必填，生成签名的时间戳
                         nonceStr: result.nonceStr, // 必填，生成签名的随机串
