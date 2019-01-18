@@ -143,6 +143,7 @@ export default {
 			}  
 			//判断错误的题目的个数 达到3个后显示错误信息  
 			if (this.falseNum == 3) {
+				this.clearInterval(this.timerc)
 				this.buttonName = ''
 				this.shareDialog.show()
 				return false
@@ -164,10 +165,11 @@ export default {
 				//2、判断有没有错了3题 错了就要去支付
 				this.falseNum++;
 				if (this.falseNum == 3) {
+					this.buttonName = ''
+					//时间就不要再走了,不然又要跳转到首页
+					clearInterval(this.timerc)
 					//跳转支付或者分享  弹出一个弹窗 分享和购买按钮   同时答题时间的弹出去掉
 					this.shareDialog.show()
-					this.buttonName = ''
-					// this.subscribeDialog.show()
 				} else if (this.falseNum != 3) {
 					// let list = document.getElementById('ulItem');
 					// list.removeChild(list.childNodes[0]);

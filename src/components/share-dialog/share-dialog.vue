@@ -23,9 +23,10 @@ export default {
       this.$refs.popup.show()
       this.$emit('show')
     },
-    hide () {
-      this.$refs.popup.hide()
-      this.$emit('hide')
+    hide () {  //关闭弹框，直接跳转到首页
+      // this.$refs.popup.hide()
+      // this.$emit('hide')
+      this.$router.push('/');
     },
     share () {
       this.$refs.popup.hide()
