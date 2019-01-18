@@ -16,6 +16,11 @@ export default {
     },
     methods: {
         share(){
+            let shan_share_fresh = sessionStorage.getItem('shan_share_fresh')
+            if (shan_share_fresh == 'undefined') {
+                sessionStorage.setItem('shan_share_fresh',1)
+                location.reload()
+            }
             //获取页面URL
             let requestUrl = "http://www.hhfff.cn/api/getWxConfig"
             axios.get(requestUrl)
@@ -24,7 +29,6 @@ export default {
                 let res = response.data
                 if (res.code == '000') { //获取微信配置成功
                     let result = res.data
-                    location.reload()
                     //----------微信配置信息----------------------
                     wx.config({
                         debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
