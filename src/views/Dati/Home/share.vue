@@ -34,13 +34,13 @@ export default {
                         jsApiList: [
                             // "updateAppMessageShareData", //自定义“分享给朋友”及“分享到QQ”按钮的分享内容
                             // "updateTimelineShareData",    //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
-                            "updateTimelineShareData"    //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
+                            "onMenuShareTimeline"    //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
 			            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                     });
                     //---------微信处理验证成功或失败信息--------------
                     //处理验证失败的信息
                     wx.ready(function () {
-                        wx.updateTimelineShareData({ 
+                        wx.onMenuShareTimeline({ 
                             title: '小善答题', // 分享标题
                             link: 'http://questions.hhfff.cn/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                             imgUrl: 'http://118.24.61.194:8089/share.jpg', // 分享图标
