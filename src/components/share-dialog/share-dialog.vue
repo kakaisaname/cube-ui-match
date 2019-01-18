@@ -30,6 +30,7 @@ export default {
     },
     share () {
       this.$refs.popup.hide()
+      this.$router.push('/dati/share')
       //这只是一张分享图片  **后期可能去掉
       // this.gongzonghaoDialog.show()
       
