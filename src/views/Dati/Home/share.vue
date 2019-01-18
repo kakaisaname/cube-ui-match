@@ -13,7 +13,9 @@ export default {
     created () {
         //获取微信配置
         this.share()
-        this.$router.go(0)
+    },
+    mounted () {
+      location.reload()  
     },
     methods: {
         share(){
