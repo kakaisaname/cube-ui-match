@@ -5,20 +5,89 @@
     	</header>
     	<div>
     		<div class="home_logo item_container_style"></div>
-    		<router-link to="dati/item" class="start button_style"></router-link>
+			<div class="descption">
+				<div class="continue" style="font-size:20px;letter-spacing:2px">连续回答20道问题</div>
+				<div class="false" style="font-size:10px;padding-top:5px;letter-spacing:2px">答错离场，答对继续</div>
+			</div>
+			<button class="start_button" @click="toItem">开始答题</button>
     	</div>
   	</section>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+// import { mapState, mapActions } from 'vuex'
+// import axios from 'axios'
 export default {
-    name: 'start',
+	name: 'start',
     data () {
         return {
-            'level':'第一周'
+			'level':'普通场',
         }
-    }
+	},
+	created () {
+		
+	},
+	mounted () {
+		this.isweixin();
+	},
+	methods: {
+		// GetQueryString = name => {
+		// 	var url = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		// 	var newUrl = window.location.search.substr(1).match(url);
+		// if (newUrl != null) {
+		// 	return unescape(newUrl[2]);
+		// } else {
+		// 	return false;
+		  // }  
+		//判断是不是微信环境
+		isweixin() {
+          const ua = window.navigator.userAgent.toLowerCase();
+          if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+			  //是微信环境 
+          } else {
+			 window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87b7db7c08baa173&redirect_uri=sss&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
+          }
+      	},
+		//开始答题
+		toItem()
+		{
+			this.$router.push('/dati/empty');
+			// console.log(this.$route.query)
+			//获取用户的openid
+			//1、获取code
+		// 	const URL= 'http://www.hhfff.cn/api/getSubjects'
+		// 	//发送请求
+        //     axios.get(URL)
+        //     .then((res)=>{
+		// 			const data = res.data;
+		// 			const selected = data.data.selected;
+		// 			if (data.status == true) {
+		// 				//将selected和题目存入state中,其实没必要了
+		// 				this.storeSelected(selected);
+		// 				this.answerid = selected;
+		// 				//将题目也存入state中
+		// 				let questions = data.data.res;
+		// 				questions.forEach(element => {
+		// 					element.answer = JSON.parse(element.answer);
+		// 				});
+		// 				this.storeQuestion(questions);
+		// 				//2、获取openid 跳一个空白页,空白页再跳转到答题页
+		// 				this.$router.push('/dati/empty');
+		// 			} else {
+		// 				alert('暂时还没有题目,请尽情期待');
+		// 				return false;
+		// 			}
+        //         }
+        //     )
+        //     .catch((error)=>{
+		// 			alert(error)
+        //         	// alert('添加题目失败');
+		// 			// return false;
+		// 			this.$router.push('/dati/empty');
+        //         }
+        //     )	
+		}
+	}
 }
 </script>
 
@@ -77,9 +146,28 @@ export default {
         margin-left: -2.4rem; //向左靠点
         background-repeat: no-repeat;
     }
-    .start{
-        background-image: url(~@/assets/images/1-4.png);  //开始按钮图片
-    }
+    // .start{
+    //     background-image: url(~@/assets/images/1-4.png);  //开始按钮图片
+	// }
+	.start_button{
+		position: absolute;
+		top: 65%;
+		width: 10rem;
+		height: 3rem;
+		left: 30%;
+		border-radius: 20px;
+		border:5px solid lightseagreen;
+		background-color: lightseagreen;
+		font-size: 20px;
+		color: white;
+	}
+	.descption{
+		top: 40%;
+		position:absolute;
+		color: white;
+		left: 28%;
+		word-spacing: 30px;
+	}
 </style>
 
 

@@ -18,5 +18,10 @@ module.exports = {
   devServer: {
     port: 8080,  //端口,
     disableHostCheck: true  //这个是出现
+  },
+  configureWebpack: {
+    performance: {
+      hints: false
+    }
   }
 }

@@ -1,26 +1,43 @@
 <template>
   	<section class="home_container">
+		<div class="clock">
+			{{buttonName}}
+		</div>
     	<header class="top_tips">
     		<span class="num_tip">题目{{itemNum}}</span>
     	</header>
     	<div> <!--进入题目页面-->
     		<div class="item_back item_container_style">
     			<div class="item_list_container" v-if="itemDetail.length >0"> <!--获取题目的数量-->
-    				<header class="item_title">{{itemDetail[itemNum-1].name}} </header> <!--获取题目的标题-->
-    				<!-- <ul>
-    					<li  v-for="(item, index) of itemDetail[itemNum-1].answer" :key="index" @click="choosed(index, item.answer_id)" class="item_list">
-    						<span class="option_style" v-bind:class="{'has_choosed':choosedNum==index}">{{chooseType(index)}}</span>
-    						<span class="option_detail">{{item.answer}}</span> 
+				<div class="item_title">{{itemDetail[itemNum-1].name}} </div> <!--获取题目的标题-->
+    				<ul id="ulItem">
+    					<li  v-for="(item, index) of itemDetail[itemNum-1].answer" :key="index" @click="choosed(index,item.answer_id)" class="item_list">
+    						<!-- <span class="option_style" v-bind:class="{'has_choosed':choosedNum==index}">{{chooseType(index)}}</span> -->
+							<button class="option_detail">{{item.answer}}</button>
     					</li>
-    				</ul> -->
-					<cube-radio-group v-model="selected" :options="options"/>
+    				</ul>
+					<!-- <cube-radio-group v-model="selected" :options="options"/> -->
+					<!-- <cube-button  class="button"  icon="cubeic-right">rrrrrrrrrrrrrrrrrrrrrr</cube-button>
+					<cube-button  class="button">Primary Button</cube-button>
+					<cube-button  class="button">Primary Button</cube-button>
+					<cube-button  class="button">Primary Button</cube-button> -->
     			</div>
     		</div>
 			<!--如果小于总页数-->
-    		<span class="next_item button_style" @click="nextItem" v-if="itemNum < itemDetail.length"></span>
+    		<span class="next_item button_style" @click="nextItem" v-if="itemNum < itemDetailLength" id="next"></span>
 
-    		<span class="submit_item button_style" v-else @click="submitAnswer"></span>
+    		<span class="button_style" v-else @click="submitAnswer" id="next"></span>
     	</div>
+		<p class="tip-eg">
+			<cube-tip
+				ref="tip2"
+				:direction="direction"
+				:style="tipStyle"
+				@close="close"
+				@click="clickHandler">
+				<div>答题时间到</div>
+			</cube-tip>
+		</p>
   	</section>
 </template>
 
@@ -37,10 +54,12 @@ export default {
 			choosedId:null, //选中答案id
 			countdown:null,	//倒计时时间
 			timerc: null,	//计时器
-			// buttonName:'',	//倒计时文字显示内容
+			buttonName:'',	//倒计时文字显示内容
 			timecome:false,	
-			selected: '',
-      		options: ['Option1', 'Option2']
+			answerid: null,    //正确答案数组
+			falseNum:0,  	//答题错误的次数
+			direction: '',
+			tipStyle: ''
 		}
 	},
   	computed: {
@@ -49,48 +68,70 @@ export default {
 			  'level', //第几周
 			  'itemDetail', //题目详情
 			  'timer', //计时器
-			  ]),	  	  	
+			//   'answerid'
+			  ]),
+		  itemDetailLength:function() {
+			  return this.itemDetail.length
+		  }
 	},
 	mounted () {
 		// this.timedown();
 		//后端获取题目
+		this.falseNum = 0;
 		this.getSubjects();
+		this.timedown();
 	},
   	methods: {
+		  //answerid 为正确答案
   		...mapActions([   //执行添加答案,初始化数据，添加选中答案，获取的所有问题等操作
   			'addNum', 'initializeData','storeSelected','storeQuestion'
 		  ]),
-		//   timedown(){ //倒计时方法 会执行一次
-		// 	this.countdown = 5;
-		// 	this.buttonName = "倒计时(" + this.countdown + ")";
-		// 	this.timerc = setInterval(() => {
-		// 		this.countdown--;
-		// 		this.buttonName = "倒计时(" + this.countdown + ")";
-		// 		if (this.countdown ==0) {
-		// 			clearInterval(this.timerc);
-		// 			this.buttonName = ''
-		// 			// alert("答题时间到");
-		// 			this.timecome = true
-		// 			return false;
-		// 		}		
-		// 	}, 1000)	
-		//   },
+		  timedown(){ //倒计时方法 会执行一次
+			this.countdown = 5;
+			this.buttonName = "倒计时(" + this.countdown + ")";
+			this.timerc = setInterval(() => {
+				this.countdown--;
+				this.buttonName = "倒计时(" + this.countdown + ")";
+				if (this.countdown ==0) {
+					clearInterval(this.timerc);
+					this.buttonName = '';
+					this.showTip();
+					// alert("答题时间到");
+					this.timecome = true
+					return false;
+				}		
+			}, 1000)	
+		  },
+		  showTip(){ //弹出提示框
+			this.direction = 'top'
+      		this.$refs.tip2.show()
+			this.tipStyle = 'left: 100px; top: 30px;'
+			return false;
+		 },
+		 close() { //关闭提示后，跳转到答题首页
+		 	this.$router.push('/');
+    	},
+    	clickHandler() {
+      		console.log('click tip area')
+    	},
+		
   		//点击下一题
   		nextItem(){
+			//将li的class 
+			let list = document.getElementById('ulItem');
+			list.childNodes[0].childNodes[0].className="option_detail"; 
+			list.childNodes[1].childNodes[0].className="option_detail"; 
+			list.childNodes[2].childNodes[0].className="option_detail"; 
+			list.childNodes[3].childNodes[0].className="option_detail"; 
 			//判断时间到了没
 			if (this.timecome == false) {  //false
 				clearInterval(this.timerc);
-			//执行timedown方法
-				// this.timedown()
-				if (this.choosedNum !== null) {  //选中答案后 将choosedNum置为null
-					this.choosedNum = null;
-					//保存答案, 题目索引加一，跳到下一题
-					this.addNum(this.choosedId)
-				}else{
-					alert('您还没有选择答案哦')
-				}
+				//执行timedown方法
+				 this.timedown()
+				//  	//保存答案, 题目索引加一，跳到下一题
+				this.addNum(this.choosedId)
 			} else {
-				alert('答题时间到,不能答题了');
+				this.showTip();
 				return false;
 			}
   		},
@@ -105,30 +146,74 @@ export default {
 	  	},
 	  	//选中的答案信息
 	  	choosed(type,id){
-	  		this.choosedNum = type; //type 选中答案索引
-	  		this.choosedId = id;	//选中题目的id
+			//答题时间到  显示提示信息
+			if (this.timecome == true) {
+				this.showTip();
+				return false;
+			}  
+			//判断错误的题目的个数 达到3个后显示错误信息  
+			if (this.falseNum == 3) {
+				this.buttonName = ''
+				this.shareDialog.show()
+				return false
+			}
+			//如果是  
+			let list = document.getElementById('ulItem');
+			this.choosedId = id;	//选中题目的id
+			// console.log(this.answerid.indexOf(id))
+			//1、判断答案是不是正确的，正确的显示下一题
+			if ( this.answerid.indexOf(id) !=-1) {
+				list.childNodes[type].childNodes[0].className="option_detail_true";				
+				//获取点击的button
+				setTimeout(()=>{
+					document.getElementById("next").click();
+				},300)
+				//跳到下一题
+			} else {
+				list.childNodes[type].childNodes[0].className="option_detail_false";
+				//2、判断有没有错了3题 错了就要去支付
+				this.falseNum++;
+				if (this.falseNum == 3) {
+					//跳转支付或者分享  弹出一个弹窗 分享和购买按钮   同时答题时间的弹出去掉
+					this.shareDialog.show()
+					this.buttonName = ''
+					// this.subscribeDialog.show()
+				} else if (this.falseNum != 3) {
+					// let list = document.getElementById('ulItem');
+					// list.removeChild(list.childNodes[0]);
+					//3、没错到3题，继续答题 显示错误答案
+					setTimeout(()=>{
+						document.getElementById("next").click();
+					},300)
+				}
+			}
+			//2、不正确，显示错误的答案（不显示正确的答案）
+	  		// this.choosedNum = type; //type 选中答案索引
 	  	},
 	  	//到达最后一题，交卷，请空定时器，跳转分数页面
 	  	submitAnswer(){
-	  		if (this.choosedNum !== null) {
-	  			this.addNum(this.choosedId)
-	  			clearInterval(this.timerc)
-	  			this.$router.push('score')  //跳转到score路由
-  			}else{
-  				alert('您还没有选择答案哦')
-  			}
+			  //答最后一道题 错了3道，也显示错误信息
+			  if (this.falseNum == 3) {
+				  this.showTip();
+			  }
+			  this.addNum(this.choosedId)
+			  setTimeout(()=>{
+					clearInterval(this.timerc)
+					this.$router.push('/dati/score')  //跳转到score路由
+			   },300)	  
 		  },
 		 //获取题目 
 		 getSubjects(){
-			const URL= 'http://118.24.61.194/api/getSubjects' 
+			const URL= 'http://www.hhfff.cn/api/getSubjects' 
 			//发送请求
             axios.get(URL)
             .then(res=>{
 					const data = res.data;
 					const selected = data.data.selected;
 					if (data.status == true) {
-						//将selected和题目存入state中
+						//将selected和题目存入state中,其实没必要了
 						this.storeSelected(selected);
+						this.answerid = selected;
 						//将题目也存入state中
 						let questions = data.data.res;
 						questions.forEach(element => {
@@ -151,12 +236,15 @@ export default {
 		 itemDetailLen() {
 			  return this.itemDetail
 				// return 5;
-		  }
+		  },
 	},
 	created(){
 		//初始化信息
 		this.initializeData(); //初始化信息 state.itemNum = 1;state.allTime = 0;state.answerid = [];
 			// document.body.style.backgroundImage = '@/assets/img/4-1.jpg';
+    	this.shareDialog = this.$createShareDialog()
+    	// this.subscribeDialog = this.$createSubscribeDialog()
+
 	}
 }
 </script>
@@ -167,6 +255,10 @@ export default {
 		width: 100%;
 		background: url(~@/assets/images/1-1.jpg) no-repeat;  //所有页面背景图都为这个
 		background-size: 100% 100%;
+	}
+	.clock{
+		color: white;
+		padding-top: 20%;
 	}
 	//本项目使用默认字号（16px）
 	//3.25rem * 16 = 52px
@@ -216,30 +308,35 @@ export default {
         background-repeat: no-repeat;
 	}
     .next_item{  //下一题
-		top: 25rem;
-    	background-image: url(~@/assets/images/2-2.png);
+		top: 0%;
+    	// background-image: url(~@/assets/images/2-2.png);
     }
-	.submit_item{ //提交按钮
-		top: 25rem;
-    	background-image: url(~@/assets/images/3-1.png);
-    }
+	// .submit_item{ //提交按钮
+		// top: 25rem;
+    	// background-image: url(~@/assets/images/3-1.png);
+    // }
     .item_list_container{
     	position: absolute;
     	height: 7.0rem;
-    	width: 8.0rem;
+    	width: 18.0rem;
     	top: 2.4rem;
-		left: 3rem;
+		// left: 3rem;
 		-webkit-font-smoothing: antialiased;
     }
 	.item_title{
-		font-size: 0.65rem;
+		font-size: 15px;
 		color: #fff;
 		line-height: 0.7rem;
+		left: 13%;
+		float: left;
+		position: relative;  //相对于item_list_container来定位
+		padding-bottom: 10%;
 	}
 	.item_list{
 		font-size: 2.5rem;  //增加选项间上下距离
 		margin-top: 0.4rem;
 		width: 20rem;
+		float: left;
 		span{
 			display: inline-block;
 			font-size: 0.6rem;
@@ -263,15 +360,56 @@ export default {
 			border-color: #ffd400;
 		}
 		.option_detail{
-			font-size: 2rem;
+			left: 4%;
+			font-size: 20px;
 			width: 10rem;
 			padding-top: 0.11rem;
+			border-radius: 20px;
+			background-color: white;
+			color: cyan;
+			font-weight: bold;
+			margin-bottom: 30px;
+			width: 70%;
+			height: 50px;
+			border:1px solid rgb(54, 65, 69);
+			position: relative;
+		}
+		.option_detail_false{
+			left: 4%;
+			font-size: 20px;
+			width: 10rem;
+			padding-top: 0.11rem;
+			border-radius: 20px;
+			background-color: violet;
+			color:white;
+			font-weight: bold;
+			margin-bottom: 30px;
+			width: 70%;
+			height: 50px;
+			border:1px solid rgb(54, 65, 69);
+			position: relative;
+		}
+		.option_detail_true{
+			left: 4%;
+			font-size: 20px;
+			width: 10rem;
+			padding-top: 0.11rem;
+			border-radius: 20px;
+			background-color: green;
+			color:white;
+			font-weight: bold;
+			margin-bottom: 30px;
+			width: 70%;
+			height: 50px;
+			border:1px solid rgb(54, 65, 69);
+			position: relative;
 		}
 	}
 	.cube-radio-group{
-		background-color:rgb(52, 59, 65)
+		background-color: rgb(54, 65, 69)
 	}
-	 {
-
+	.cube-btn{
+		padding-top: 20px;
+		margin: 15px 0;
 	}
 </style>

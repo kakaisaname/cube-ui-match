@@ -1,17 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import qs from 'qs'
 import Home from './views/Home.vue'
-
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    // {
+    //   path: '/',
+    //   name: 'home',
+    //   component:Home
+    // },
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'dati',
+      component: () => import(/* webpackChunkName: "about" */ './views/Dati/Home/home.vue'),
     },
     {
       path: '/recipes',
@@ -22,19 +27,25 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/Recipes/recipes.vue')
     },
     {
-      path: '/dati',
-      name: 'dati',
-      component: () => import(/* webpackChunkName: "about" */ './views/Dati/Home/home.vue')
-    },
-    {
       path: '/dati/item',
       name: 'itemlist',
       component: () =>
-      import(/* webpackChunkName: "about" */ "./views/Dati/Item/itemlist.vue")
+      import(/* webpackChunkName: "about" */ "./views/Dati/Item/itemlist.vue"),
+      // beforeEnter: (to, from, next) => { //在进入这个路由之前 先去授权页
+      // }
+    },{
+      path: '/dati/auth',
+      name: 'oauth',
+      component: () => import(/* webpackChunkName: "about" */ './views/Dati/Item/oauth.vue')
     }, {
       path: '/dati/score',
       name:'score',
       component: () =>
       import(/* webpackChunkName: "about" */ "./views/Dati/Score/score.vue")
+    },{
+      path: '/dati/empty',
+      name:'empty',
+      component: () =>
+      import(/* webpackChunkName: "about" */ "./views/Dati/Home/empty.vue")
     }]
 })

@@ -32,7 +32,7 @@ export default {
     computed: mapState(['answerid','selected']),  //将state中的answerid数组拿过来
 	created(){
         this.computedScore(); 
-        this.getScoreTip();
+        // this.getScoreTip();
         document.body.style.backgroundImage = '~@/assets/img/4-1.jpg';  //设置背景图
     },
     methods: {
