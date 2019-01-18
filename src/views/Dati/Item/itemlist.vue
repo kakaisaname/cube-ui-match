@@ -28,7 +28,7 @@
 
     		<span class="button_style" v-else @click="submitAnswer" id="next"></span>
     	</div>
-		<p class="tip-eg">
+		<!-- <p class="tip-eg">
 			<cube-tip
 				ref="tip2"
 				:direction="direction"
@@ -37,7 +37,7 @@
 				@click="clickHandler">
 				<div>答题时间到</div>
 			</cube-tip>
-		</p>
+		</p> -->
   	</section>
 </template>
 
@@ -45,6 +45,7 @@
 import { mapState, mapActions } from 'vuex'
 // import { subjects } from "@/api/getData"
 import axios from "axios";
+import { Message } from 'element-ui';
 export default {
 	name: 'itemlist',
 	data() {
@@ -95,26 +96,16 @@ export default {
 				if (this.countdown ==0) {
 					clearInterval(this.timerc);
 					this.buttonName = '';
-					this.showTip();
-					// alert("答题时间到");
-					this.timecome = true
+					this.close();         //答题时间递减结束，给出答题时间到，退出
 					return false;
 				}		
 			}, 1000)	
 		  },
-		  showTip(){ //弹出提示框
-			this.direction = 'top'
-      		this.$refs.tip2.show()
-			this.tipStyle = 'left: 100px; top: 30px;'
-			return false;
-		 },
+		  
 		 close() { //关闭提示后，跳转到答题首页
-		 	this.$router.push('/');
-    	},
-    	clickHandler() {
-      		console.log('click tip area')
-    	},
-		
+		 	 Message.success('答题时间到');
+			 this.$router.push('/');
+		},
   		//点击下一题
   		nextItem(){
 			//将li的class 
@@ -124,14 +115,13 @@ export default {
 			list.childNodes[2].childNodes[0].className="option_detail"; 
 			list.childNodes[3].childNodes[0].className="option_detail"; 
 			//判断时间到了没
-			if (this.timecome == false) {  //false
+			if (this.timecome == false) {  //false   没到
 				clearInterval(this.timerc);
 				//执行timedown方法
 				 this.timedown()
 				//  	//保存答案, 题目索引加一，跳到下一题
 				this.addNum(this.choosedId)
-			} else {
-				this.showTip();
+			} else {					  //到了
 				return false;
 			}
   		},
@@ -146,9 +136,9 @@ export default {
 	  	},
 	  	//选中的答案信息
 	  	choosed(type,id){
-			//答题时间到  显示提示信息
+			//答题时间到  显示提示信息  
 			if (this.timecome == true) {
-				this.showTip();
+				this.close();
 				return false;
 			}  
 			//判断错误的题目的个数 达到3个后显示错误信息  
@@ -192,10 +182,9 @@ export default {
 	  	},
 	  	//到达最后一题，交卷，请空定时器，跳转分数页面
 	  	submitAnswer(){
-			  //答最后一道题 错了3道，也显示错误信息
-			  if (this.falseNum == 3) {
-				  this.showTip();
-			  }
+			//   if (this.falseNum == 3) {
+			// 	  this.showTip();
+			//   }
 			  this.addNum(this.choosedId)
 			  setTimeout(()=>{
 					clearInterval(this.timerc)
