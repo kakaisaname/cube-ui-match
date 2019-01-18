@@ -55,7 +55,7 @@ export default {
                                 console.log("分享到朋友圈成功返回的信息为:", res);
                                 Message.success('分享到朋友圈成功');
                                 //直接跳转到首页
-                                this.$router.push('/');
+                                router.push('/');
                             }
                         });
                     })
