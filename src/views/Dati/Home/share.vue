@@ -42,8 +42,7 @@ export default {
                         console.log('验证失败返回的信息:', res);
                      });
                      //处理验证成功的信息
-                     wx.ready(function () {
-                         wx.updateTimelineShareData({ 
+                     wx.onMenuShareTimeline({ 
                             title: '小善答题', // 分享标题
                             link: 'http://questions.hhfff.cn/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                             imgUrl: 'http://118.24.61.194:8089/share.jpg', // 分享图标
@@ -52,7 +51,6 @@ export default {
                                 console.log("分享到朋友圈成功返回的信息为:", res);
                                 Message.success('分享到朋友圈成功');
                             }
-                         });
                      });
                 } else if (res.code == '003') { //失败
                     Message.success('分享功能，系统正在维护中。。。')
