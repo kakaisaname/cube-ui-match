@@ -149,9 +149,6 @@ export default {
                 Message.success('分享功能，系统正在维护中。。。')
                 return false
             })
-        },
-        addDatiNum () {
-                               
         }
   }
 }
