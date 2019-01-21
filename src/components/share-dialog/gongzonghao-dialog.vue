@@ -60,7 +60,7 @@ export default {
                             // "updateAppMessageShareData", //自定义“分享给朋友”及“分享到QQ”按钮的分享内容
                             // "updateTimelineShareData",    //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
                             "onMenuShareTimeline",    //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
-                            "onMenuShareAppMessage",  //分享给朋友
+                            "onMenuShareAppMessage",  //分享给朋友或群
 			            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                     });
                     //---------微信处理验证成功或失败信息--------------
@@ -83,15 +83,27 @@ export default {
                                 //直接跳转到首页
                             },
                             // cancel: function () {  //微信不给你机会判断用户到底有没有分享
-                            //     alert(4)
-                            //     sessionStorage.removeItem('shan_share_fresh')
-                            //     Message.error('分享到朋友圈失败');
-                            //     setTimeout(() => {
-                            //         window.location.href = "http://questions.hhfff.cn/"
-                            //     }, 3000)
-                            // }
                         });
-                    })
+                        wx.onMenuShareAppMessage({
+                            title: '小善答题', // 分享标题
+                            desc: '小善,专注女性保养', // 分享描述
+                            link: 'http://questions.hhfff.cn/share/gongzonghaoPicture', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                            imgUrl: 'http://118.24.61.194:8089/share.jpg', // 分享图标
+                            type: '', // 分享类型,music、video或link，不填默认为link
+                            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                            success: function () {
+                              // 用户点击了分享后执行的回调函数
+                                sessionStorage.removeItem('shan_share_fresh')
+                                console.log("分享到朋友圈成功返回的信息为:", res);
+                                Message.success('分享到朋友圈成功');
+                                //增加答题次数
+                                setTimeout(() => {
+                                    //分享后跳转 
+                                    window.location.href = "http://questions.hhfff.cn"
+                                }, 3000)  
+                              }
+                            });
+                        })
                      wx.error(function (res) {
                         console.log('验证失败返回的信息:', res);
                      });
