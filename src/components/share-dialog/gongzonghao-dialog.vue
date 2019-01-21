@@ -105,7 +105,6 @@ export default {
                               }
                             });
                         })
-                    //  this.addDatiNum()
                      wx.error(function (res) {
                         console.log('验证失败返回的信息:', res);
                      });
@@ -118,7 +117,7 @@ export default {
                 Message.success('分享功能，系统正在维护中。。。')
                 return false
             })
-        },
+        }
         // addDatiNum () {
         //   let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
         //   let postUrl = "http://www.hhfff.cn/api/addUserDatiNum"
