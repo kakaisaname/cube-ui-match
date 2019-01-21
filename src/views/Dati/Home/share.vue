@@ -49,7 +49,7 @@ export default {
                     wx.ready(function () {
                         wx.onMenuShareTimeline({ 
                             title: '小善答题', // 分享标题
-                            link: 'http://questions.hhfff.cn/shareurl', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                            link: 'http://questions.hhfff.cn/share/gongzonghaoPicture', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                             imgUrl: 'http://118.24.61.194:8089/share.jpg', // 分享图标
                             success: function () {
                             // 设置成功
@@ -58,7 +58,7 @@ export default {
                                 Message.success('分享到朋友圈成功');
                                 setTimeout(() => {
                                     //分享后跳转 
-                                    window.location.href = "http://questions.hhfff.cn/share/gongzonghaoPicture"
+                                    window.location.href = "http://questions.hhfff.cn"
                                 }, 3000)
                                 //直接跳转到首页
                             },

@@ -28,6 +28,8 @@ export default {
       this.$refs.popup.hide()
       this.$emit('hide')
       Message.error('您已取消分享')
+      //跳转到首页
+      window.location.href = "http://questions.hhfff.cn"
     },
     share(){
             //也不知道为什么，分享 必须要刷新下页面才行，所以做以下判断
@@ -70,6 +72,7 @@ export default {
                                 sessionStorage.removeItem('shan_share_fresh')
                                 console.log("分享到朋友圈成功返回的信息为:", res);
                                 Message.success('分享到朋友圈成功');
+                                //增加答题次数
                                 setTimeout(() => {
                                     //分享后跳转 
                                     window.location.href = "http://questions.hhfff.cn/share/gongzonghaoPicture"
