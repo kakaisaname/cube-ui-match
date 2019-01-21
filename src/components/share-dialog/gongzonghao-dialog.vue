@@ -105,7 +105,7 @@ export default {
                               }
                             });
                         })
-                     this.addDatiNum()
+                    //  this.addDatiNum()
                      wx.error(function (res) {
                         console.log('验证失败返回的信息:', res);
                      });
