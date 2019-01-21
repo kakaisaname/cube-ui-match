@@ -61,7 +61,7 @@ export default {
                             // "updateTimelineShareData",    //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
                             "onMenuShareTimeline",    //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
                             "onMenuShareAppMessage",  //分享给朋友或群
-			            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			                  ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                     });
                     //---------微信处理验证成功或失败信息--------------
                     //处理验证失败的信息
@@ -75,17 +75,7 @@ export default {
                                 sessionStorage.removeItem('shan_share_fresh')
                                 console.log("分享到朋友圈成功返回的信息为:", res);
                                 Message.success('分享到朋友圈成功');
-                                let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
-                                let postUrl = "http://www.hhfff.cn/api/addUserDatiNum"
-                                axios.post(postUrl, {
-                                    openid:wechatopenid
-                                  })
-                                  .then(function (response) {
-                                    console.log(response);
-                                  })
-                                  .catch(function (error) {
-                                    console.log(error);
-                                });
+                                
                                 //增加答题次数
                                 setTimeout(() => {
                                     //分享后跳转 
@@ -107,17 +97,6 @@ export default {
                                 sessionStorage.removeItem('shan_share_fresh')
                                 console.log("分享到朋友成功返回的信息为:", res);
                                 Message.success('分享给朋友成功');
-                                let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
-                                let postUrl = "http://www.hhfff.cn/api/addUserDatiNum"
-                                axios.post(postUrl, {
-                                    openid:wechatopenid
-                                  })
-                                  .then(function (response) {
-                                    console.log(response);
-                                  })
-                                  .catch(function (error) {
-                                    console.log(error);
-                                });
                                 //增加答题次数
                                 setTimeout(() => {
                                     //分享后跳转 
@@ -126,6 +105,7 @@ export default {
                               }
                             });
                         })
+                     this.addDatiNum()
                      wx.error(function (res) {
                         console.log('验证失败返回的信息:', res);
                      });
@@ -138,6 +118,19 @@ export default {
                 Message.success('分享功能，系统正在维护中。。。')
                 return false
             })
+        },
+        addDatiNum () {
+          let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
+          let postUrl = "http://www.hhfff.cn/api/addUserDatiNum"
+            axios.post(postUrl, {
+                 openid:wechatopenid
+            })
+            .then(function (response) {
+                 console.log(response);
+            })
+            .catch(function (error) {
+                 console.log(error);
+            });                      
         }
   }
 }
