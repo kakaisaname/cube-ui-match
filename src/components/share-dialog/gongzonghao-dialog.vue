@@ -94,8 +94,10 @@ export default {
                             success: function () {
                               // 用户点击了分享后执行的回调函数
                                 sessionStorage.removeItem('shan_share_fresh')
-                                console.log("分享到朋友圈成功返回的信息为:", res);
-                                Message.success('分享到朋友圈成功');
+                                console.log("分享到朋友成功返回的信息为:", res);
+                                Message.success('分享给朋友成功');
+                                let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
+                                alert(wechatopenid);
                                 this.addDatiNum();
                                 //增加答题次数
                                 setTimeout(() => {
