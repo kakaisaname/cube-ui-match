@@ -66,7 +66,7 @@ export default {
                     //---------微信处理验证成功或失败信息--------------
                     //处理验证失败的信息
                     wx.ready(function () {
-                        wx.onMenuShareTimeline({ 
+                        wx.onMenuShareTimeline({
                             title: '小善答题', // 分享标题
                             link: 'http://questions.hhfff.cn/share/gongzonghaoPicture', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                             imgUrl: 'http://118.24.61.194:8089/share.jpg', // 分享图标
@@ -119,19 +119,19 @@ export default {
                 return false
             })
         },
-        addDatiNum () {
-          let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
-          let postUrl = "http://www.hhfff.cn/api/addUserDatiNum"
-            axios.post(postUrl, {
-                 openid:wechatopenid
-            })
-            .then(function (response) {
-                 console.log(response);
-            })
-            .catch(function (error) {
-                 console.log(error);
-            });                      
-        }
+        // addDatiNum () {
+        //   let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
+        //   let postUrl = "http://www.hhfff.cn/api/addUserDatiNum"
+        //     axios.post(postUrl, {
+        //          openid:wechatopenid
+        //     })
+        //     .then(function (response) {
+        //          console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //          console.log(error);
+        //     });                      
+        // }
   }
 }
 </script>
