@@ -21,10 +21,10 @@ import {
 } from 'cube-ui'
 import SubscribeDialog from '@/components/subscribe-dialog/subscribe-dialog'
 import ShareDialog from '@/components/share-dialog/share-dialog'
-import GongzonghaoDialog from '@/components/share-dialog/gongzonghao-dialog'
+// import GongzonghaoDialog from '@/components/share-dialog/gongzonghao-dialog'
 createAPI(Vue, SubscribeDialog, [], true)
 createAPI(Vue, ShareDialog, [], true)
-createAPI(Vue, GongzonghaoDialog, [], true)
+// createAPI(Vue, GongzonghaoDialog, [], true)
 
 Vue.use(Button)
 Vue.use(Loading)
