@@ -51,7 +51,8 @@ export default new Router({
       path: '/dati/share',
       name:'share',
       component: () =>
-      import(/* webpackChunkName: "about" */ "./views/Dati/Home/share.vue")
+      // import(/* webpackChunkName: "about" */ "./views/Dati/Home/share.vue")
+      import(/* webpackChunkName: "about" */ "./components/share-dialog/gongzonghao-dialog.vue")
     },{
       path: '/shareurl', //分享链接的
       name:'shareurl',
