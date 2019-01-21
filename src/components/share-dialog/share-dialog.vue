@@ -45,9 +45,9 @@ export default {
       }).show()
     }
   },
-  created () {
-      this.gongzonghaoDialog = this.$createGongzonghaoDialog();
-  }
+  // created () {
+  //     this.gongzonghaoDialog = this.$createGongzonghaoDialog();
+  // }
 }
 </script>
 
