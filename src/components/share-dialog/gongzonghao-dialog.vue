@@ -85,17 +85,17 @@ export default {
                                 sessionStorage.removeItem('shan_share_fresh')
                                 console.log("分享到朋友圈成功返回的信息为:", res);
                                 Message.success('分享到朋友圈成功');
-                                let postUrl = "http://www.hhfff.cn/api/addUserDatiNum";
-                                let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
-                                  axios.post(postUrl, {
-                                      openid:wechatopenid
-                                  })
-                                  .then(function (response) {
-                                      console.log(response);
-                                  })
-                                  .catch(function (error) {
-                                      console.log(error);
-                                  }); 
+                                // let postUrl = "http://www.hhfff.cn/api/addUserDatiNum";
+                                // let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
+                                //   axios.post(postUrl, {
+                                //       openid:wechatopenid
+                                //   })
+                                //   .then(function (response) {
+                                //       console.log(response);
+                                //   })
+                                //   .catch(function (error) {
+                                //       console.log(error);
+                                //   }); 
                                 //增加答题次数
                                 setTimeout(() => {
                                     //分享后跳转 
@@ -117,18 +117,18 @@ export default {
                                 sessionStorage.removeItem('shan_share_fresh')
                                 console.log("分享到朋友成功返回的信息为:", res);
                                 Message.success('分享给朋友成功');
-                                let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
-                                alert(wechatopenid)
-                                let postUrl = "http://www.hhfff.cn/api/addUserDatiNum"
-                                  axios.post(postUrl, {
-                                      openid:wechatopenid
-                                  })
-                                  .then(function (response) {
-                                      console.log(response);
-                                  })
-                                  .catch(function (error) {
-                                      console.log(error);
-                                  }); 
+                                // let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
+                                // alert(wechatopenid)
+                                // let postUrl = "http://www.hhfff.cn/api/addUserDatiNum"
+                                //   axios.post(postUrl, {
+                                //       openid:wechatopenid
+                                //   })
+                                //   .then(function (response) {
+                                //       console.log(response);
+                                //   })
+                                //   .catch(function (error) {
+                                //       console.log(error);
+                                //   }); 
                                 //增加答题次数
                                 setTimeout(() => {
                                     //分享后跳转 
