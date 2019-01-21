@@ -1,8 +1,10 @@
 <template>
   <div class="subscribe-dialog-view">
-    <!-- <cube-popup ref="popup" @mask-click="hide"> -->
+    <!-- <cube-popup ref="popup" @mask-click="hide"> -->  
       <div class="share-dialog-wrapper">
-        <img src="../../assets/img/share.jpg">
+        <p class="guanzhu">扫描下方二维码，关注公众号</p>
+        <p class="wenzi">进行学习</p>  
+        <img src="../../assets/img/shan.png">
       </div>
     <!-- </cube-popup> -->
   </div>
@@ -18,13 +20,15 @@ export default {
 </script>
 
 <style lang="stylus">
+     .wenzi
+       padding-bottom 30%
+     .guanzhu
+       padding-bottom 5%   
 //   .subscribe-dialog-view
-//     display: block;
-//     overflow hidden;
-//     min-width: 100%;
-//     min-height: 50%;
+//     width: 100%;
+//     height: 100%;
 //     background-repeat:no-repeat;
-//     background-image:url('../../assets/img/share.jpg')
+//     background-image:url('../../assets/img/shan.png')
     // position: absolute
     // box-sizing: border-box
     // max-width: 360px
