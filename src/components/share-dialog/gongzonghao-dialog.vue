@@ -96,6 +96,7 @@ export default {
                                 sessionStorage.removeItem('shan_share_fresh')
                                 console.log("分享到朋友圈成功返回的信息为:", res);
                                 Message.success('分享到朋友圈成功');
+                                this.addDatiNum();
                                 //增加答题次数
                                 setTimeout(() => {
                                     //分享后跳转 
@@ -116,6 +117,12 @@ export default {
                 Message.success('分享功能，系统正在维护中。。。')
                 return false
             })
+        },
+        addDatiNum(){
+            let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
+            alert(wechatopenid);
+            // let URL = ''
+            // axios.post('')
         }
   }
 }
