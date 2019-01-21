@@ -42,7 +42,7 @@ export default {
                 location.reload()
             }
             //获取页面URL
-            let requestUrl = encodeURIComponent("http://www.hhfff.cn/api/getWxConfig")
+            let requestUrl = "http://www.hhfff.cn/api/getWxConfig"
             // var u = navigator.userAgent;
             // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
             // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
