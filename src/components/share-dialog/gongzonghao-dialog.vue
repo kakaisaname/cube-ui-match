@@ -29,7 +29,10 @@ export default {
       this.$emit('hide')
       Message.error('您已取消分享')
       //跳转到首页
-      window.location.href = "http://questions.hhfff.cn"
+      setTimeout(() => {
+          //分享后跳转 
+          window.location.href = "http://questions.hhfff.cn"
+      }, 3000)
     },
     share(){
             //也不知道为什么，分享 必须要刷新下页面才行，所以做以下判断
