@@ -75,7 +75,16 @@ export default {
                                 sessionStorage.removeItem('shan_share_fresh')
                                 console.log("分享到朋友圈成功返回的信息为:", res);
                                 Message.success('分享到朋友圈成功');
-                                
+                                let postUrl = "http://www.hhfff.cn/api/addUserDatiNum"
+                                  axios.post(postUrl, {
+                                      openid:wechatopenid
+                                  })
+                                  .then(function (response) {
+                                      console.log(response);
+                                  })
+                                  .catch(function (error) {
+                                      console.log(error);
+                                  }); 
                                 //增加答题次数
                                 setTimeout(() => {
                                     //分享后跳转 
@@ -97,6 +106,17 @@ export default {
                                 sessionStorage.removeItem('shan_share_fresh')
                                 console.log("分享到朋友成功返回的信息为:", res);
                                 Message.success('分享给朋友成功');
+                                let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
+                                let postUrl = "http://www.hhfff.cn/api/addUserDatiNum"
+                                  axios.post(postUrl, {
+                                      openid:wechatopenid
+                                  })
+                                  .then(function (response) {
+                                      console.log(response);
+                                  })
+                                  .catch(function (error) {
+                                      console.log(error);
+                                  }); 
                                 //增加答题次数
                                 setTimeout(() => {
                                     //分享后跳转 
@@ -105,7 +125,6 @@ export default {
                               }
                             });
                         })
-                     this.addDatiNum()
                      wx.error(function (res) {
                         console.log('验证失败返回的信息:', res);
                      });
@@ -120,17 +139,7 @@ export default {
             })
         },
         addDatiNum () {
-          let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
-          let postUrl = "http://www.hhfff.cn/api/addUserDatiNum"
-            axios.post(postUrl, {
-                 openid:wechatopenid
-            })
-            .then(function (response) {
-                 console.log(response);
-            })
-            .catch(function (error) {
-                 console.log(error);
-            });                      
+                               
         }
   }
 }
