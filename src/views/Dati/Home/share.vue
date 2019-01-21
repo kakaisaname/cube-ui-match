@@ -40,7 +40,8 @@ export default {
                         jsApiList: [
                             // "updateAppMessageShareData", //自定义“分享给朋友”及“分享到QQ”按钮的分享内容
                             // "updateTimelineShareData",    //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
-                            "onMenuShareTimeline"    //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
+                            "onMenuShareTimeline",    //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
+                            "onMenuShareAppMessage",  //分享给朋友
 			            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                     });
                     //---------微信处理验证成功或失败信息--------------
@@ -56,18 +57,19 @@ export default {
                                 console.log("分享到朋友圈成功返回的信息为:", res);
                                 Message.success('分享到朋友圈成功');
                                 setTimeout(() => {
-                                    window.location.href = "http://questions.hhfff.cn/"
+                                    //分享后跳转 
+                                    window.location.href = "http://questions.hhfff.cn/share/gongzonghaoPicture"
                                 }, 3000)
                                 //直接跳转到首页
                             },
-                            cancel: function () {  //下周开发，取消分享其实可以继续分享的 ***
-                            alert(4)
-                                sessionStorage.removeItem('shan_share_fresh')
-                                Message.error('分享到朋友圈失败');
-                                setTimeout(() => {
-                                    window.location.href = "http://questions.hhfff.cn/"
-                                }, 3000)
-                            }
+                            // cancel: function () {  //微信不给你机会判断用户到底有没有分享
+                            //     alert(4)
+                            //     sessionStorage.removeItem('shan_share_fresh')
+                            //     Message.error('分享到朋友圈失败');
+                            //     setTimeout(() => {
+                            //         window.location.href = "http://questions.hhfff.cn/"
+                            //     }, 3000)
+                            // }
                         });
                     })
                      wx.error(function (res) {
