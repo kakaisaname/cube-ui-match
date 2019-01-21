@@ -43,6 +43,10 @@ new Vue({
 }).$mount('#app')
 
 router.beforeEach(( to, from, next ) => {
+  if (!window.initUrl) {
+    window.initUrl = location.href.split('#')[0]
+  }
+  next()
   //判断当前是否是新建的auth路由空白页面
   if (to.name == 'empty') {
     let wechatopenid = localStorage.getItem('shan_wechat_oauth_openid');
