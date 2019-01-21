@@ -12,6 +12,9 @@
 <script>
 export default {
   name: 'gongzonghao-dialog',
+  mounted () {
+    this.show() 
+  },
   methods: {
     show () {
       this.$refs.popup.show()
