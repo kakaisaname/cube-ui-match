@@ -43,6 +43,9 @@ export default {
             }
             //获取页面URL
             let requestUrl = "http://www.hhfff.cn/api/getWxConfig"
+            //如果是hash模式，url去掉'#'hash部分，可用location.href.split('#')[0]
+            //由于开启了history模式
+            let url  = location.href;
             // var u = navigator.userAgent;
             // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
             // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
@@ -53,7 +56,11 @@ export default {
             // if (isIOS) {
             //     url=location.href.split('#')[0]  //hash后面的部分如果带上ios中config会不对
             // }
-            axios.get(requestUrl)
+            axios.get(requestUrl,{
+              params: {
+                url: url
+              }
+            })
             .then((response) => {
                 //判断是否获取成功
                 let res = response.data
@@ -61,7 +68,7 @@ export default {
                     let result = res.data
                     //----------微信配置信息----------------------
                     wx.config({
-                        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
                         appId: result.appId, // 必填，公众号的唯一标识
                         timestamp: result.timestamp, // 必填，生成签名的时间戳
                         nonceStr: result.nonceStr, // 必填，生成签名的随机串
