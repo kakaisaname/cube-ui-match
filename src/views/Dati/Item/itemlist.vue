@@ -88,7 +88,7 @@ export default {
   			'addNum', 'initializeData','storeSelected','storeQuestion'
 		  ]),
 		  timedown(){ //倒计时方法 会执行一次
-			this.countdown = 5;
+			this.countdown = 10;
 			this.buttonName = "倒计时(" + this.countdown + ")";
 			this.timerc = setInterval(() => {
 				this.countdown--;
@@ -321,6 +321,7 @@ export default {
 		left: 13%;
 		float: left;
 		position: relative;  //相对于item_list_container来定位
+		margin-top: 5%;
 		padding-bottom: 2%;
 	}
 	.item_list{
