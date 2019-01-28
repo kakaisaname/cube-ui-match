@@ -321,6 +321,7 @@ export default {
 		left: 13%;
 		float: left;
 		position: relative;  //相对于item_list_container来定位
+		padding-top: 10%;
 		padding-bottom: 10%;
 	}
 	.item_list{
