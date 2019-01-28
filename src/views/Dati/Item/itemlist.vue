@@ -249,7 +249,7 @@ export default {
 	}
 	.clock{
 		color: white;
-		padding-top: 20%;
+		padding-top: 10%;
 	}
 	//本项目使用默认字号（16px）
 	//3.25rem * 16 = 52px
@@ -307,7 +307,7 @@ export default {
     	// background-image: url(~@/assets/images/3-1.png);
     // }
     .item_list_container{
-    	position: absolute;
+    	// position: absolute;
     	height: 7.0rem;
     	width: 18.0rem;
     	top: 2.4rem;
@@ -321,8 +321,7 @@ export default {
 		left: 13%;
 		float: left;
 		position: relative;  //相对于item_list_container来定位
-		padding-top: 5%;
-		padding-bottom: 10%;
+		padding-bottom: 2%;
 	}
 	.item_list{
 		font-size: 2.5rem;  //增加选项间上下距离

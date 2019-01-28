@@ -52,6 +52,7 @@ export default {
 		toItem()
 		{
 			this.$router.push('/dati/empty');
+			// this.$router.push('/dati/item');
 			// console.log(this.$route.query)
 			//获取用户的openid
 			//1、获取code
